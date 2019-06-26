@@ -39,6 +39,8 @@ main() {
         mnt /sys  -o nosuid,noexec,nodev    -t sysfs    sys
         mnt /run  -o mode=0755,nosuid,nodev -t tmpfs    run
         mnt /dev  -o mode=0755,nosuid       -t devtmpfs dev
+        [ -d /sys/firmware/efi ] && \
+        mnt /sys/firmware/efi/efivars       -t efivarfs efivarfs
 
         # shellcheck disable=2174
         mkdir -pm 0755 /run/runit \
